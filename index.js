@@ -9,7 +9,6 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
-// const uri = `mongodb+srv://${rahuldharroni}:${RG7nyg1zxoVGXbiS}@cluster0.euxm4cs.mongodb.net/?retryWrites=true&w=majority`;
 const uri =
   "mongodb+srv://rahuldharroni:RG7nyg1zxoVGXbiS@cluster0.zm4fkig.mongodb.net/?retryWrites=true&w=majority";
 
@@ -22,7 +21,7 @@ const client = new MongoClient(uri, {
 const run = async () => {
   try {
     const db = client.db("BooksBd");
-    const productCollection = db.collection("Books");
+    const productCollection = db.collection("AllBooks");
     const userCollection = db.collection("Users");
     console.log("DAAAAAAAAAAADAAAAAAAAbase connected");
     app.get("/products", async (req, res) => {
@@ -34,9 +33,7 @@ const run = async () => {
 
     app.post("/product", async (req, res) => {
       const product = req.body;
-
       const result = await productCollection.insertOne(product);
-
       res.send(result);
     });
 
